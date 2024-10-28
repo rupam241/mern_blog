@@ -9,18 +9,22 @@ import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import DashBoard from './pages/DashBoard.jsx';
 import Projects from './pages/Projects.jsx';
+import Layout from './Layout.jsx';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-    <Route path= "/" element={<Home />}/>
-    <Route path= "/about" element={<About />}/>
-    <Route path= "/signin" element={<SignIn/>}/>
-    <Route path= "/signup" element={<SignUp />}/>
-    <Route path= "/dashboard" element={<DashBoard />}/>
-    <Route path= "/projects" element={<Projects />}/>
     
-
+    <>
+    <Route path="/" element={<Layout/>}>
+    <Route path= "" element={<Home />}/>
+    <Route path= "about" element={<About />}/>
+    <Route path= "signin" element={<SignIn/>}/>
+    <Route path= "signup" element={<SignUp />}/>
+    <Route path= "dashboard" element={<DashBoard />}/>
+    <Route path= "projects" element={<Projects />}/>
+    
+    </Route>
 
     </>
 
