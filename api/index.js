@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
-import authRoutes from "./routes/auth.route.js"
+import authRoutes from "./routes/auth.route.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // Ensure that you are using process.env.MONGODB_URI
-mongoose.connect(process.env.MONGODB_URI, )
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("Connected to MongoDB!");
 
@@ -22,6 +22,20 @@ mongoose.connect(process.env.MONGODB_URI, )
     })
     .catch((error) => {
         console.error("Connection error:", error);
+        process.exit(1); // Exit process if unable to connect to MongoDB
     });
-    app.use('/api/user',userRoutes)
-    app.use('/api/auth',authRoutes)
+
+// Route middleware
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message
+    });
+});
