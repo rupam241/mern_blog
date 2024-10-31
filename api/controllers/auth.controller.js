@@ -7,7 +7,7 @@ export const signup = async (req, res, next) => {
 
     // Validate the input fields
     if (!username || !email || !password || username === "" || email === "" || password === "") {
-    next(errorHandler(400,"All fields are required."))
+    next(errorHandler(400,"All fields"))
     }
 
     try {

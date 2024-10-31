@@ -95,7 +95,7 @@ const Header = () => {
           <button className="w-12 h-10 text-gray-400 sm:inline">
             <FaMoon className="w-6 h-6" />
           </button>
-          <Link to="signin">
+          <Link to="signup">
             <button className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white text-lg">
               Sign In
             </button>
