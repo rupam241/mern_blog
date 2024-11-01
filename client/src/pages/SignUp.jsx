@@ -39,7 +39,8 @@ function SignUp() {
         return setError(data.message || "Signup failed. Please try again.");
       }
 
-      alert("User registered successfully!");
+      alert(`${formData.username} registered successfully!`);
+
       navigate('/signin'); // Redirect to Sign In on success
 
     } catch (error) {
