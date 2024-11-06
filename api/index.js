@@ -29,6 +29,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 
+
 // Error-handling middleware
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
