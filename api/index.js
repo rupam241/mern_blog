@@ -28,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI)
 // Route middleware
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/auth',authRoutes);
 
 
 // Error-handling middleware
