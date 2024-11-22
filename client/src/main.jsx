@@ -11,8 +11,10 @@ import DashBoard from './pages/DashBoard.jsx';
 import Projects from './pages/Projects.jsx';
 import Layout from './Layout.jsx';
 import { Provider } from 'react-redux';
-import store, { persistor } from './app/store.js'; // Import both store and persistor correctly
+import store, { persistor } from './app/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
+import ThemeProvider from '../provider/ThemeProvider.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +24,12 @@ const router = createBrowserRouter(
         <Route path="about" element={<About />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="dashboard" element={<DashBoard />} />
+        
+        {/* Protecting Dashboard route with PrivateRoute */}
+        <Route element={<PrivateRoute />}> 
+          <Route path="dashboard" element={<DashBoard />} />
+        </Route>
+       
         <Route path="projects" element={<Projects />} />
       </Route>
     </>
@@ -31,10 +38,12 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}> {/* Wrap PersistGate inside Provider */}
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
-      </PersistGate>
+    <Provider store={store}>
+      <ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
+      </ThemeProvider>
     </Provider>
   </StrictMode>
 );

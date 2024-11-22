@@ -119,3 +119,13 @@ export const google = async (req, res, next) => {
         next(error);
     }
 };
+export const logout = async (req, res, next) => {
+    try {
+        // Clear the access_token cookie
+        res.clearCookie('access_token', { httpOnly: true }).status(200).json({
+            message: "Logged out successfully",
+        });
+    } catch (error) {
+        next(error); // Pass the error to the middleware
+    }
+};
