@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from "./routes/auth.route.js";
-import updateAuthRoutes from "./routes/update.auth.route.js";
+
 import cors from 'cors';
 
 // Load environment variables from .env file
@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/auth',authRoutes);
-app.use('/api/auth',updateAuthRoutes)
+
 
 
 

@@ -1,56 +1,43 @@
+import { HiUser } from "react-icons/hi";
+import {HiArrowSmRight} from "react-icons/hi"
+import { Link } from "react-router-dom";
+
 import React from "react";
-import { CgProfile } from "react-icons/cg";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { resetState } from '../redux/user/userSlice';
 
-function DashSideBar() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSignOutClick = async () => {
-    try {
-      const res = await fetch('/api/auth/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-      });
-
-      if (res.ok) {
-        console.log("logout successful");
-        dispatch(resetState());
-        navigate('/signin');
-      } else {
-        console.error('Failed to log out');
-      }
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
-  };
-
+function DashSideBar({tab}) {
   return (
-    <div className="flex flex-col gap-3 items-center md:items-start">
-      {/* Profile Button */}
-      <div className="bg-slate-100 px-4 py-2 rounded-md w-40 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-200 md:items-start">
-        <div className="flex items-center gap-2">
-          <CgProfile />
-          <span>Profile</span>
-        </div>
-        <span className="bg-slate-400 text-white px-2 py-0.5 rounded-md text-sm">
-          User
-        </span>
+    <div className=" flex flex-col gap-1">
+  <div className={`flex justify-between px-4 py-2 rounded-lg cursor-pointer items-center ${
+          tab === "profile" ? "bg-slate-100" : ""
+        }`}>
+    <div className="flex gap-2 items-center">
+      <div>
+        <HiUser />
       </div>
-
-      {/* Sign Out Button */}
-      <div
-        className="px-4 py-2 rounded-md w-40 flex gap-2 items-center cursor-pointer hover:bg-slate-200 md:justify-start"
-        onClick={handleSignOutClick}
-      >
-        <FaLongArrowAltRight />
-        Sign Out
-      </div>
+      <Link to='/dashboard?tab=profile'>
+      <div>Profile</div>
+      </Link>
     </div>
+
+    {/* user */}
+    <div>User</div>
+  </div>
+  
+
+  {/* signout */}
+  <div className="flex justify-between  px-4 py-2 rounded-lg cursor-pointer hover:bg-slate-100">
+    <div className="flex gap-2 items-center">
+      <div>
+        <HiArrowSmRight />
+      </div>
+      <div>Signout</div>
+    </div>
+
+   
+  </div>
+
+</div>
+
   );
 }
 

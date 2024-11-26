@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    dispatch(resetState()); // Dispatch logout action
+  // Dispatch logout action
     setIsProfileMenuOpen(false);
   };
 
